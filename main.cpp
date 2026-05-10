@@ -1,4 +1,8 @@
 #include <stdio.h>
+/*
+1 ----> Desafio Fazer calculo Imc(indice de massa corporal) com uma função recursiva
+IMC = Peso / Altura^2
+*/
 
 // Assinatura das funçoes
 float Soma(float Num1, float Num2);
@@ -9,10 +13,11 @@ float Fatorial(float Num1);
 float Termial(float Num1);
 float Exponencial(float Num1, float Num2);
 float Fibonucci(float Num1);
+float Imc(float peso, float altura);
 
 int main()
 {
-    float num1, num2, ResSoma = 0, ResulSub = 0, ResMult = 0, ResDiv = 0, ResFato = 0, ResTer = 0, ResEx = 0, Resf = 0;
+    float num1, num2, ResSoma = 0, ResulSub = 0, ResMult = 0, ResDiv = 0, ResFato = 0, ResTer = 0, ResEx = 0, Resf = 0, ResImc = 0, peso = 0, altura = 0;
     int opcao;
     while (true)
     {
@@ -26,7 +31,8 @@ int main()
         printf("\n 6 --- Termial");
         printf("\n 7 --- Exponencial");
         printf("\n 8 --- Fibonucci");
-        printf("\n 9 --- Sair");
+        printf("\n 9 --- Imc");
+        printf("\n 10 --- Sair");
 
         printf("\n Digite opcao desejada: ");
         scanf("%d", &opcao);
@@ -112,14 +118,25 @@ int main()
         case 8:
             printf("\n ------------- \n");
             printf("\n -= Fibonucci =- \n");
-            printf("\n Digite numero 1º: ");
+            printf("\n Digite numero 1: ");
             scanf("%f", &num1);
-            printf("\n Digite numero 2º: ");
+            printf("\n Digite numero 2: ");
             scanf("%f", &num2);
             Resf = Fibonucci(num1);
             printf("\n Fibonucci: %.2f", Resf);
             break;
         case 9:
+            printf("\n ----------- \n");
+            printf("\n -= Imc =- \n");
+            printf("\n Digite seu peso: ");
+            scanf("%f", &peso);
+            printf("\n Digite sua altura: ");
+            scanf("%f", &altura);
+            ResImc = Imc(peso, altura);
+            printf("\n seu peso %.2f sua altura %.2f seu indice de massa corporal (Imc): %.2f", peso, altura, ResImc);
+            break;
+
+        case 10:
             printf("\n Saindo.........");
             return 0;
         }
@@ -182,7 +199,13 @@ float Exponencial(float Num1, float Num2)
 
 float Fibonucci(float Num1)
 {
-    if (Num1 == 1 || Num1 == 2)
+    if (Num1 == 1 || Num1 == 2) // O(2^n)
         return 1;
     return Fibonucci(Num1 - 1) + Fibonucci(Num1 - 2);
+}
+
+float Imc(float peso, float altura)
+{
+    float imc = peso / (altura * altura);
+    return imc;
 }
