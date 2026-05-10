@@ -206,6 +206,6 @@ float Fibonucci(float Num1)
 
 float Imc(float peso, float altura)
 {
-    float imc = peso / (altura * altura);
-    return imc;
+    float imc = 0;
+    return imc = peso / (altura * altura);
 }
