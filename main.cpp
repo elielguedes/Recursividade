@@ -1,7 +1,11 @@
 #include <stdio.h>
 /*
 1 ----> Desafio Fazer calculo Imc(indice de massa corporal) com uma função recursiva
-IMC = Peso / Altura^2
+media aritimetica (media , moda , mediaana)
+Celsius → Fahrenhei:
+celsius ->f = c.1.8+32
+fahr -> c = (f - 32) / 1.8
+e baskara = 𝑥 = −𝑏 ± 𝑏^2 − 4 . 𝑎 .𝑐 / 2.𝑎
 */
 
 // Assinatura das funçoes
@@ -14,10 +18,12 @@ float Termial(float Num1);
 float Exponencial(float Num1, float Num2);
 float Fibonucci(float Num1);
 float Imc(float peso, float altura);
+float Media(float Num1, float Num2);
 
 int main()
 {
     float num1, num2, ResSoma = 0, ResulSub = 0, ResMult = 0, ResDiv = 0, ResFato = 0, ResTer = 0, ResEx = 0, Resf = 0, ResImc = 0, peso = 0, altura = 0;
+    float ResMedia = 0;
     int opcao;
     while (true)
     {
@@ -32,7 +38,8 @@ int main()
         printf("\n 7 --- Exponencial");
         printf("\n 8 --- Fibonucci");
         printf("\n 9 --- Imc");
-        printf("\n 10 --- Sair");
+        printf("\n 10 --- Media Aritimetica");
+        printf("\n 11 --- Sair");
 
         printf("\n Digite opcao desejada: ");
         scanf("%d", &opcao);
@@ -87,8 +94,6 @@ int main()
             printf("\n -= Fatorial =- \n");
             printf("\n Digite numero 1º: ");
             scanf("%f", &num1);
-            printf("\n Digite numero 2º: ");
-            scanf("%f", &num2);
             ResFato = Fatorial(num1);
             printf("\n Fatorial: %.2f!", ResFato);
             break;
@@ -135,8 +140,18 @@ int main()
             ResImc = Imc(peso, altura);
             printf("\n seu peso %.2f sua altura %.2f seu indice de massa corporal (Imc): %.2f", peso, altura, ResImc);
             break;
-
         case 10:
+            printf("\n ----------- \n");
+            printf("\n -= Media Aritimetica =- \n");
+            printf("\n Digite numero 1: ");
+            scanf("%f", &num1);
+            printf("\n Digite numero 2: ");
+            scanf("%f", &num2);
+            ResMedia = Media(num1, num2);
+            printf("\n Media %.2f + %.2f / 2 = %2.2f", num1, num2, ResMedia);
+            break;
+
+        case 11:
             printf("\n Saindo.........");
             return 0;
         }
@@ -164,20 +179,24 @@ float mult(float Num1, float Num2)
         return 0;
     else if (Num2 == 1)
         return Num1;
-    return Num1 * (Num1 - 1, Num2);
+    else
+        return Num1 + mult(Num1, Num2 - 1);
 }
 
 float Div(float Num1, float Num2)
 {
     if (Num2 == 0)
+        return -1;
+    else if (Num1 < Num2) // Parada
         return 0;
-    return Num1 / (Num1 - 1, Num2);
+    else
+        return 1 + Div(Num1 - Num2, Num2);
 }
 
 float Fatorial(float Num1)
 {
     if (Num1 == 0 || Num1 == 1)
-        return Num1;
+        return 1;
     return Num1 * Fatorial(Num1 - 1);
 }
 
@@ -208,4 +227,14 @@ float Imc(float peso, float altura)
 {
     float imc = 0;
     return imc = peso / (altura * altura);
+}
+
+float Media(float Num1, float Num2)
+{
+    if (Num1 == Num2)
+        return Num1;
+    else if (Num2 < Num1)
+        return Media(Num1 + 1, Num2 - 1);
+    else
+        return Media(Num1 - 1, Num2 + 1);
 }
